@@ -1,0 +1,61 @@
+<h2>זיהוי מטופלים — עם אפשרות דחייה</h2>
+<p class="subtitle">Each name can be added as a patient or dismissed as "not a patient"</p>
+
+<style>
+  .phone-wrap { max-width:380px; margin:0 auto; }
+  .phone-frame { background:#1a1a2e; border-radius:16px; font-family:sans-serif; padding:16px; direction:rtl; box-shadow:0 4px 24px #0008; }
+  .new-patient-row { background:#16213e; border:1px solid #3182ce44; border-radius:10px; padding:12px; margin-bottom:8px; }
+  .dismissed-row { background:#16213e; border:1px solid #2d3748; border-radius:10px; padding:12px; margin-bottom:8px; opacity:0.45; }
+  .mock-input { background:#0f3460; border:1px solid #2d3748; border-radius:6px; padding:8px 10px; color:#a0aec0; font-size:12px; width:100%; box-sizing:border-box; text-align:right; margin-top:8px; }
+  .big-btn { background:#3182ce; color:white; border:none; border-radius:10px; padding:13px; width:100%; font-size:13px; cursor:pointer; margin-top:4px; }
+  .chip-inline { background:#3182ce22; border:1px solid #3182ce66; color:#63b3ed; border-radius:5px; padding:2px 8px; font-size:10px; }
+  .chip-ignored { background:#2d374844; border:1px solid #4a5568; color:#718096; border-radius:5px; padding:2px 8px; font-size:10px; }
+  .dismiss-btn { background:transparent; border:1px solid #4a5568; color:#718096; border-radius:6px; padding:4px 10px; font-size:11px; cursor:pointer; }
+  .undo-btn { background:transparent; border:1px solid #4a5568; color:#63b3ed; border-radius:6px; padding:4px 10px; font-size:11px; cursor:pointer; }
+</style>
+
+<div class="phone-wrap">
+  <div class="phone-frame">
+
+    <div style="color:white; font-size:15px; font-weight:bold; text-align:right; margin-bottom:4px;">זיהוי מטופלים</div>
+    <div style="color:#a0aec0; font-size:11px; text-align:right; margin-bottom:14px;">נמצאו 3 שמות חדשים ביומן</div>
+
+    <!-- Row 1: adding as patient -->
+    <div class="new-patient-row">
+      <div style="display:flex; justify-content:space-between; align-items:center;">
+        <button class="dismiss-btn">לא מטופל ✕</button>
+        <div style="display:flex; align-items:center; gap:6px;">
+          <span style="color:white; font-size:13px; font-weight:bold;">שרה כהן</span>
+          <span class="chip-inline">חדש</span>
+        </div>
+      </div>
+      <input class="mock-input" placeholder="מחיר ברירת מחדל לפגישה (₪)" value="150" />
+    </div>
+
+    <!-- Row 2: dismissed -->
+    <div class="dismissed-row">
+      <div style="display:flex; justify-content:space-between; align-items:center;">
+        <button class="undo-btn">בטל ↩</button>
+        <div style="display:flex; align-items:center; gap:6px;">
+          <span style="color:#718096; font-size:13px; font-weight:bold; text-decoration:line-through;">דני לוי</span>
+          <span class="chip-ignored">לא מטופל</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Row 3: not yet decided -->
+    <div class="new-patient-row">
+      <div style="display:flex; justify-content:space-between; align-items:center;">
+        <button class="dismiss-btn">לא מטופל ✕</button>
+        <div style="display:flex; align-items:center; gap:6px;">
+          <span style="color:white; font-size:13px; font-weight:bold;">מיכל גל</span>
+          <span class="chip-inline">חדש</span>
+        </div>
+      </div>
+      <input class="mock-input" placeholder="מחיר ברירת מחדל לפגישה (₪)" />
+    </div>
+
+    <button class="big-btn" style="margin-top:12px;">סיום וכניסה לאפליקציה ✓</button>
+
+  </div>
+</div>

@@ -1,0 +1,97 @@
+<h2>מסך הבית — איזה פריסה מתאימה?</h2>
+<p class="subtitle">Home screen layout — which feels right for daily use?</p>
+
+<div class="cards">
+
+  <div class="card" data-choice="a" onclick="toggleSelect(this)">
+    <div class="card-image" style="direction:rtl; padding:12px; background:#1a1a2e; border-radius:8px; font-family:sans-serif;">
+      <div style="background:#16213e; border-radius:6px; padding:8px; margin-bottom:6px; font-size:11px; color:#a0aec0; text-align:right;">יום שני, 6 במאי</div>
+      <div style="background:#0f3460; border-radius:6px; padding:8px; margin-bottom:4px; display:flex; justify-content:space-between; align-items:center;">
+        <span style="background:#e53e3e; color:white; border-radius:4px; padding:2px 6px; font-size:10px;">לא שולם</span>
+        <span style="color:white; font-size:12px;">שרה כהן — 10:00</span>
+      </div>
+      <div style="background:#0f3460; border-radius:6px; padding:8px; margin-bottom:4px; display:flex; justify-content:space-between; align-items:center;">
+        <span style="background:#38a169; color:white; border-radius:4px; padding:2px 6px; font-size:10px;">שולם ✓</span>
+        <span style="color:white; font-size:12px;">דני לוי — 11:00</span>
+      </div>
+      <div style="background:#0f3460; border-radius:6px; padding:8px; margin-bottom:4px; display:flex; justify-content:space-between; align-items:center;">
+        <span style="background:#e53e3e; color:white; border-radius:4px; padding:2px 6px; font-size:10px;">לא שולם</span>
+        <span style="color:white; font-size:12px;">מיכל גל — 14:00</span>
+      </div>
+      <div style="display:flex; justify-content:space-around; margin-top:8px; border-top:1px solid #2d3748; padding-top:8px;">
+        <span style="color:#a0aec0; font-size:10px;">📅 פגישות</span>
+        <span style="color:#a0aec0; font-size:10px;">👤 מטופלים</span>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>A — Session View</h3>
+      <p>Today's sessions listed by time. Quick payment status per session. Best for daily workflow.</p>
+    </div>
+  </div>
+
+  <div class="card" data-choice="b" onclick="toggleSelect(this)">
+    <div class="card-image" style="direction:rtl; padding:12px; background:#1a1a2e; border-radius:8px; font-family:sans-serif;">
+      <div style="background:#16213e; border-radius:6px; padding:8px; margin-bottom:6px; font-size:11px; color:#a0aec0; text-align:right;">מטופלים — יתרה לתשלום</div>
+      <div style="background:#0f3460; border-radius:6px; padding:8px; margin-bottom:4px; display:flex; justify-content:space-between; align-items:center;">
+        <span style="color:#fc8181; font-size:12px; font-weight:bold;">₪300</span>
+        <span style="color:white; font-size:12px;">שרה כהן</span>
+      </div>
+      <div style="background:#0f3460; border-radius:6px; padding:8px; margin-bottom:4px; display:flex; justify-content:space-between; align-items:center;">
+        <span style="color:#68d391; font-size:12px; font-weight:bold;">₪0</span>
+        <span style="color:white; font-size:12px;">דני לוי</span>
+      </div>
+      <div style="background:#0f3460; border-radius:6px; padding:8px; margin-bottom:4px; display:flex; justify-content:space-between; align-items:center;">
+        <span style="color:#fc8181; font-size:12px; font-weight:bold;">₪450</span>
+        <span style="color:white; font-size:12px;">מיכל גל</span>
+      </div>
+      <div style="background:#e53e3e22; border-radius:6px; padding:6px; text-align:center; margin-top:8px;">
+        <span style="color:#fc8181; font-size:11px;">סה"כ חוב: ₪750</span>
+      </div>
+      <div style="display:flex; justify-content:space-around; margin-top:8px; border-top:1px solid #2d3748; padding-top:8px;">
+        <span style="color:#a0aec0; font-size:10px;">📅 פגישות</span>
+        <span style="color:#a0aec0; font-size:10px;">👤 מטופלים</span>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>B — Patient Balance View</h3>
+      <p>All patients with their outstanding balance. Total debt at a glance. Best for chasing payments.</p>
+    </div>
+  </div>
+
+  <div class="card" data-choice="c" onclick="toggleSelect(this)">
+    <div class="card-image" style="direction:rtl; padding:12px; background:#1a1a2e; border-radius:8px; font-family:sans-serif;">
+      <div style="display:flex; gap:6px; margin-bottom:8px;">
+        <div style="flex:1; background:#0f3460; border-radius:6px; padding:8px; text-align:center;">
+          <div style="color:#fc8181; font-size:14px; font-weight:bold;">₪750</div>
+          <div style="color:#a0aec0; font-size:9px;">חוב כולל</div>
+        </div>
+        <div style="flex:1; background:#0f3460; border-radius:6px; padding:8px; text-align:center;">
+          <div style="color:#68d391; font-size:14px; font-weight:bold;">3</div>
+          <div style="color:#a0aec0; font-size:9px;">פגישות היום</div>
+        </div>
+        <div style="flex:1; background:#0f3460; border-radius:6px; padding:8px; text-align:center;">
+          <div style="color:#f6ad55; font-size:14px; font-weight:bold;">2</div>
+          <div style="color:#a0aec0; font-size:9px;">לא שילמו</div>
+        </div>
+      </div>
+      <div style="background:#16213e; border-radius:6px; padding:6px; margin-bottom:4px; font-size:10px; color:#a0aec0; text-align:right;">פגישות הקרובות</div>
+      <div style="background:#0f3460; border-radius:6px; padding:7px; margin-bottom:3px; display:flex; justify-content:space-between;">
+        <span style="background:#e53e3e; color:white; border-radius:4px; padding:2px 5px; font-size:9px;">לא שולם</span>
+        <span style="color:white; font-size:11px;">שרה כהן — 10:00</span>
+      </div>
+      <div style="background:#0f3460; border-radius:6px; padding:7px; margin-bottom:3px; display:flex; justify-content:space-between;">
+        <span style="background:#38a169; color:white; border-radius:4px; padding:2px 5px; font-size:9px;">שולם ✓</span>
+        <span style="color:white; font-size:11px;">דני לוי — 11:00</span>
+      </div>
+      <div style="display:flex; justify-content:space-around; margin-top:8px; border-top:1px solid #2d3748; padding-top:8px;">
+        <span style="color:#a0aec0; font-size:10px;">📅 פגישות</span>
+        <span style="color:#a0aec0; font-size:10px;">👤 מטופלים</span>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>C — Dashboard + Sessions</h3>
+      <p>Stats summary at top (total debt, today's sessions, unpaid count), then today's session list below.</p>
+    </div>
+  </div>
+
+</div>

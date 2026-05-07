@@ -1,0 +1,86 @@
+<h2>חיבור יומן Google — תהליך הכניסה הראשונה</h2>
+<p class="subtitle">3-step onboarding flow the first time Adi opens the app</p>
+
+<style>
+  .flow { display:flex; flex-direction:column; gap:20px; max-width:380px; margin:0 auto; }
+  .step-label { font-size:11px; color:#718096; margin-bottom:6px; text-align:right; }
+  .phone-frame { background:#1a1a2e; border-radius:16px; font-family:sans-serif; padding:20px 16px; direction:rtl; box-shadow:0 4px 24px #0008; }
+  .big-btn { background:#3182ce; color:white; border:none; border-radius:10px; padding:14px; width:100%; font-size:14px; cursor:pointer; margin-top:8px; }
+  .ghost-btn { background:transparent; border:1px solid #4a5568; color:#a0aec0; border-radius:10px; padding:10px; width:100%; font-size:13px; cursor:pointer; margin-top:6px; }
+  .unlinked-row { background:#0f3460; border-radius:8px; padding:10px 12px; margin-bottom:6px; display:flex; justify-content:space-between; align-items:center; }
+  .new-patient-row { background:#16213e; border:1px solid #3182ce44; border-radius:8px; padding:10px 12px; margin-bottom:6px; }
+  .chip-inline { background:#3182ce22; border:1px solid #3182ce66; color:#63b3ed; border-radius:5px; padding:2px 8px; font-size:10px; }
+  .mock-input { background:#16213e; border:1px solid #2d3748; border-radius:6px; padding:8px 10px; color:#a0aec0; font-size:12px; width:100%; box-sizing:border-box; text-align:right; margin-bottom:8px; }
+  .divider { border:none; border-top:1px solid #2d3748; margin:12px 0; }
+  .step-num { display:inline-block; background:#3182ce; color:white; border-radius:50%; width:22px; height:22px; line-height:22px; text-align:center; font-size:12px; font-weight:bold; margin-left:8px; }
+</style>
+
+<div class="flow">
+
+  <!-- Step 1: Connect -->
+  <div>
+    <div class="step-label"><span class="step-num">1</span> חיבור חשבון Google</div>
+    <div class="phone-frame">
+      <div style="text-align:center; padding:10px 0 16px;">
+        <div style="font-size:36px; margin-bottom:8px;">📅</div>
+        <div style="color:white; font-size:17px; font-weight:bold; margin-bottom:6px;">ברוכה הבאה, עדי</div>
+        <div style="color:#a0aec0; font-size:12px; line-height:1.6;">חברי את יומן Google שלך כדי שהאפליקציה תוכל לזהות פגישות אוטומטית</div>
+      </div>
+      <button class="big-btn">🔗 חיבור Google Calendar</button>
+    </div>
+  </div>
+
+  <!-- Step 2: Syncing -->
+  <div>
+    <div class="step-label"><span class="step-num">2</span> סנכרון — לאחר אישור OAuth</div>
+    <div class="phone-frame">
+      <div style="text-align:center; padding:16px 0;">
+        <div style="font-size:28px; margin-bottom:10px;">⏳</div>
+        <div style="color:white; font-size:14px; font-weight:bold; margin-bottom:6px;">טוען פגישות...</div>
+        <div style="color:#a0aec0; font-size:11px;">מושך פגישות מ־30 הימים האחרונים</div>
+        <div style="background:#0f3460; border-radius:8px; margin-top:14px; padding:8px 12px; font-size:11px; color:#63b3ed;">נמצאו 24 פגישות</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Step 3: Link patients -->
+  <div>
+    <div class="step-label"><span class="step-num">3</span> קישור שמות למטופלים</div>
+    <div class="phone-frame">
+      <div style="color:white; font-size:14px; font-weight:bold; text-align:right; margin-bottom:4px;">זיהוי מטופלים</div>
+      <div style="color:#a0aec0; font-size:11px; text-align:right; margin-bottom:12px;">נמצאו 3 שמות חדשים ביומן. הגדירי מחיר לפגישה עבור כל אחד.</div>
+
+      <!-- Unlinked name 1 — filled in -->
+      <div class="new-patient-row">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+          <span class="chip-inline">חדש</span>
+          <span style="color:white; font-size:13px; font-weight:bold;">שרה כהן</span>
+        </div>
+        <input class="mock-input" placeholder="מחיר ברירת מחדל לפגישה (₪)" value="150" />
+      </div>
+
+      <!-- Unlinked name 2 — empty -->
+      <div class="new-patient-row">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+          <span class="chip-inline">חדש</span>
+          <span style="color:white; font-size:13px; font-weight:bold;">דני לוי</span>
+        </div>
+        <input class="mock-input" placeholder="מחיר ברירת מחדל לפגישה (₪)" />
+      </div>
+
+      <!-- Unlinked name 3 — empty -->
+      <div class="new-patient-row">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+          <span class="chip-inline">חדש</span>
+          <span style="color:white; font-size:13px; font-weight:bold;">מיכל גל</span>
+        </div>
+        <input class="mock-input" placeholder="מחיר ברירת מחדל לפגישה (₪)" />
+      </div>
+
+      <hr class="divider" />
+      <button class="big-btn">סיום וכניסה לאפליקציה ✓</button>
+      <button class="ghost-btn">דלג — אוסיף מחירים מאוחר יותר</button>
+    </div>
+  </div>
+
+</div>

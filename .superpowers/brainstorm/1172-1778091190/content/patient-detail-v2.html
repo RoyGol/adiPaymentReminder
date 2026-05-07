@@ -1,0 +1,98 @@
+<h2>פרופיל מטופל</h2>
+<p class="subtitle">With a clear rate edit button</p>
+
+<style>
+  .phone-wrap { max-width: 380px; margin: 16px auto; }
+  .phone-frame { background:#1a1a2e; border-radius:16px; font-family:sans-serif; padding:16px; direction:rtl; box-shadow: 0 4px 24px #0008; }
+  .session-row { background:#0f3460; border-radius:8px; padding:10px 12px; margin-bottom:6px; display:flex; justify-content:space-between; align-items:center; }
+  .amt.owed { color:#fc8181; font-size:13px; font-weight:bold; }
+  .amt.paid { color:#68d391; font-size:13px; font-weight:bold; }
+  .section-label { color:#718096; font-size:11px; margin-bottom:8px; text-align:right; }
+  .stat-row { display:flex; gap:8px; margin-bottom:14px; }
+  .stat-box { flex:1; background:#0f3460; border-radius:10px; padding:10px 6px; text-align:center; }
+  .stat-box .num { font-size:16px; font-weight:bold; display:block; }
+  .stat-box .lbl { color:#a0aec0; font-size:10px; display:block; margin-top:2px; }
+  .back { color:#63b3ed; font-size:12px; margin-bottom:12px; cursor:pointer; }
+  .rate-card { background:#0f3460; border-radius:10px; padding:12px 14px; margin-bottom:14px; display:flex; justify-content:space-between; align-items:center; }
+  .rate-label { color:#a0aec0; font-size:11px; }
+  .rate-value { color:white; font-size:16px; font-weight:bold; }
+  .edit-btn { background:#3182ce22; border:1px solid #3182ce66; color:#63b3ed; border-radius:6px; padding:5px 12px; font-size:11px; cursor:pointer; }
+
+  /* Inline edit state */
+  .rate-card-edit { background:#16213e; border:1px solid #3182ce; border-radius:10px; padding:12px 14px; margin-bottom:14px; }
+  .rate-input { background:#0f3460; border:1px solid #4a5568; border-radius:6px; padding:7px 10px; color:white; font-size:16px; font-weight:bold; width:100px; text-align:center; }
+  .save-btn { background:#3182ce; color:white; border:none; border-radius:6px; padding:6px 16px; font-size:12px; cursor:pointer; }
+  .cancel-btn { background:transparent; border:1px solid #4a5568; color:#a0aec0; border-radius:6px; padding:6px 12px; font-size:12px; cursor:pointer; }
+</style>
+
+<div class="phone-wrap">
+  <div class="phone-frame">
+
+    <div class="back">← חזרה</div>
+    <div style="color:white; font-size:18px; font-weight:bold; text-align:right; margin-bottom:12px;">שרה כהן</div>
+
+    <!-- Rate row — normal state -->
+    <div class="rate-card">
+      <button class="edit-btn">עריכה ✎</button>
+      <div style="text-align:right;">
+        <div class="rate-label">מחיר ברירת מחדל לפגישה</div>
+        <div class="rate-value">₪150</div>
+      </div>
+    </div>
+
+    <!-- Rate row — editing state (shown below so you can see both states) -->
+    <div class="rate-card-edit">
+      <div style="color:#a0aec0; font-size:11px; text-align:right; margin-bottom:8px;">עריכת מחיר לפגישה</div>
+      <div style="display:flex; justify-content:space-between; align-items:center; gap:8px;">
+        <div style="display:flex; gap:6px;">
+          <button class="cancel-btn">ביטול</button>
+          <button class="save-btn">שמירה</button>
+        </div>
+        <input class="rate-input" value="150" />
+      </div>
+    </div>
+
+    <!-- Stats -->
+    <div class="stat-row">
+      <div class="stat-box">
+        <span class="num" style="color:#fc8181;">₪300</span>
+        <span class="lbl">חוב נוכחי</span>
+      </div>
+      <div class="stat-box">
+        <span class="num" style="color:#68d391;">₪900</span>
+        <span class="lbl">שולם סה"כ</span>
+      </div>
+      <div class="stat-box">
+        <span class="num" style="color:#a0aec0;">8</span>
+        <span class="lbl">פגישות</span>
+      </div>
+    </div>
+
+    <div class="section-label">היסטוריית פגישות</div>
+
+    <div class="session-row">
+      <span class="amt owed">₪150</span>
+      <div style="text-align:right;">
+        <div style="color:white; font-size:12px;">6 במאי 2026</div>
+        <div style="color:#a0aec0; font-size:10px;">10:00</div>
+      </div>
+    </div>
+
+    <div class="session-row">
+      <span class="amt owed">₪150</span>
+      <div style="text-align:right;">
+        <div style="color:white; font-size:12px;">29 באפריל 2026</div>
+        <div style="color:#a0aec0; font-size:10px;">10:00</div>
+      </div>
+    </div>
+
+    <div class="session-row">
+      <span class="amt paid">₪150 ✓</span>
+      <div style="text-align:right;">
+        <div style="color:white; font-size:12px;">22 באפריל 2026</div>
+        <div style="color:#a0aec0; font-size:10px;">10:00</div>
+      </div>
+    </div>
+
+  </div>
+</div>

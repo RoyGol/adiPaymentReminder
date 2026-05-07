@@ -1,0 +1,88 @@
+<h2>לשונית מטופלים</h2>
+<p class="subtitle">The Patients tab — which layout works best?</p>
+
+<style>
+  .phone-wrap { max-width: 380px; margin: 16px auto; }
+  .phone-frame { background:#1a1a2e; border-radius:16px; font-family:sans-serif; padding:16px; direction:rtl; box-shadow: 0 4px 24px #0008; }
+  .stacked { display:flex; flex-direction:column; gap:16px; }
+  .opt { cursor:pointer; border-radius:12px; border:2px solid #2d3748; overflow:hidden; transition: border-color 0.15s; }
+  .opt:hover { border-color:#63b3ed; }
+  .opt.selected { border-color:#63b3ed; }
+  .opt-label { background:#2d3748; padding:8px 14px; font-size:12px; color:#a0aec0; display:flex; align-items:center; gap:8px; }
+  .letter { background:#4a5568; border-radius:50%; width:20px; height:20px; display:flex; align-items:center; justify-content:center; font-size:11px; color:white; font-weight:bold; flex-shrink:0; }
+  .patient-row { background:#0f3460; border-radius:8px; padding:11px 12px; margin-bottom:6px; display:flex; justify-content:space-between; align-items:center; }
+  .patient-name { color:white; font-size:13px; }
+  .patient-sub { color:#a0aec0; font-size:10px; margin-top:2px; }
+  .amt { font-size:13px; font-weight:bold; }
+  .amt.owed { color:#fc8181; }
+  .amt.clear { color:#68d391; }
+  .tab-bar { display:flex; justify-content:space-around; margin-top:14px; border-top:1px solid #2d3748; padding-top:10px; }
+  .tab-bar span { color:#a0aec0; font-size:11px; }
+  .tab-bar span.active { color:#63b3ed; }
+  .mock-search { background:#16213e; border:1px solid #2d3748; border-radius:8px; padding:8px 12px; color:#718096; font-size:12px; width:100%; box-sizing:border-box; text-align:right; margin-bottom:10px; }
+  .filter-chip { background:#16213e; border:1px solid #2d3748; border-radius:20px; padding:4px 12px; font-size:11px; color:#a0aec0; display:inline-block; }
+  .filter-chip.active { background:#3182ce22; border-color:#3182ce; color:#63b3ed; }
+</style>
+
+<div class="stacked">
+
+  <!-- Option A: Simple list with balance -->
+  <div class="opt" onclick="toggleSelect(this)" data-choice="a">
+    <div class="opt-label"><div class="letter">A</div> Simple list — name + outstanding balance</div>
+    <div class="phone-frame" style="border-radius:0; box-shadow:none;">
+      <input class="mock-search" placeholder="🔍 חיפוש מטופל..." />
+      <div class="patient-row">
+        <span class="amt owed">₪300</span>
+        <div style="text-align:right;"><div class="patient-name">שרה כהן</div><div class="patient-sub">פגישה אחרונה: 6.5</div></div>
+      </div>
+      <div class="patient-row">
+        <span class="amt clear">מסולק ✓</span>
+        <div style="text-align:right;"><div class="patient-name">דני לוי</div><div class="patient-sub">פגישה אחרונה: 6.5</div></div>
+      </div>
+      <div class="patient-row">
+        <span class="amt owed">₪450</span>
+        <div style="text-align:right;"><div class="patient-name">מיכל גל</div><div class="patient-sub">פגישה אחרונה: 5.5</div></div>
+      </div>
+      <div class="patient-row">
+        <span class="amt clear">מסולק ✓</span>
+        <div style="text-align:right;"><div class="patient-name">יוסי אברהם</div><div class="patient-sub">פגישה אחרונה: 6.5</div></div>
+      </div>
+      <div class="tab-bar"><span>📅 פגישות</span><span class="active">👤 מטופלים</span></div>
+    </div>
+  </div>
+
+  <!-- Option B: List with filter chips (All / Unpaid only) -->
+  <div class="opt" onclick="toggleSelect(this)" data-choice="b">
+    <div class="opt-label"><div class="letter">B</div> Filtered list — chips to show all or only debtors</div>
+    <div class="phone-frame" style="border-radius:0; box-shadow:none;">
+      <div style="display:flex; gap:8px; margin-bottom:10px; flex-wrap:wrap;">
+        <span class="filter-chip">כולם (8)</span>
+        <span class="filter-chip active">חייבים (5)</span>
+        <span class="filter-chip">מסולקים (3)</span>
+      </div>
+      <div class="patient-row">
+        <div style="text-align:left;">
+          <div class="amt owed">₪450</div>
+          <div style="color:#a0aec0; font-size:9px;">3 פגישות</div>
+        </div>
+        <div style="text-align:right;"><div class="patient-name">מיכל גל</div><div class="patient-sub">₪150 לפגישה</div></div>
+      </div>
+      <div class="patient-row">
+        <div style="text-align:left;">
+          <div class="amt owed">₪300</div>
+          <div style="color:#a0aec0; font-size:9px;">2 פגישות</div>
+        </div>
+        <div style="text-align:right;"><div class="patient-name">שרה כהן</div><div class="patient-sub">₪150 לפגישה</div></div>
+      </div>
+      <div class="patient-row">
+        <div style="text-align:left;">
+          <div class="amt owed">₪200</div>
+          <div style="color:#a0aec0; font-size:9px;">2 פגישות</div>
+        </div>
+        <div style="text-align:right;"><div class="patient-name">רונית שמיר</div><div class="patient-sub">₪100 לפגישה</div></div>
+      </div>
+      <div class="tab-bar"><span>📅 פגישות</span><span class="active">👤 מטופלים</span></div>
+    </div>
+  </div>
+
+</div>

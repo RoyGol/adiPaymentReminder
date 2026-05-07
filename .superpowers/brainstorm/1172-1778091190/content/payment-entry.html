@@ -1,0 +1,72 @@
+<h2>רישום תשלום — איך להזין תשלום?</h2>
+<p class="subtitle">When Adi taps a session — how should she record the payment?</p>
+
+<style>
+  .phone-wrap { max-width: 380px; margin: 16px auto; }
+  .phone-frame { background:#1a1a2e; border-radius:16px; font-family:sans-serif; padding:16px; direction:rtl; box-shadow: 0 4px 24px #0008; }
+  .stacked { display:flex; flex-direction:column; gap:16px; }
+  .option { cursor:pointer; border-radius:12px; border:2px solid #2d3748; padding:0; overflow:hidden; transition: border-color 0.15s; }
+  .option:hover { border-color:#63b3ed; }
+  .option.selected { border-color:#63b3ed; }
+  .option-label { background:#2d3748; padding:8px 14px; font-size:12px; color:#a0aec0; display:flex; align-items:center; gap:8px; }
+  .option-label .letter { background:#4a5568; border-radius:50%; width:20px; height:20px; display:flex; align-items:center; justify-content:center; font-size:11px; color:white; font-weight:bold; flex-shrink:0; }
+  .mock-input { background:#16213e; border:1px solid #2d3748; border-radius:6px; padding:8px 10px; color:#a0aec0; font-size:12px; width:100%; box-sizing:border-box; text-align:right; }
+  .mock-btn { background:#3182ce; color:white; border:none; border-radius:8px; padding:10px; width:100%; font-size:13px; cursor:pointer; }
+  .mock-btn.ghost { background:transparent; border:1px solid #4a5568; color:#a0aec0; }
+  .field-label { font-size:10px; color:#718096; margin-bottom:4px; text-align:right; }
+</style>
+
+<div class="stacked">
+
+  <!-- Option A: Bottom sheet / modal -->
+  <div class="option" onclick="toggleSelect(this)" data-choice="a">
+    <div class="option-label"><div class="letter">A</div> Bottom sheet — slides up over current screen</div>
+    <div class="phone-frame" style="border-radius:0; box-shadow:none; padding:14px;">
+      <!-- dimmed session behind -->
+      <div style="opacity:0.3; font-size:11px; color:white; text-align:right; margin-bottom:8px;">שרה כהן — 10:00</div>
+      <!-- sheet -->
+      <div style="background:#16213e; border-radius:12px 12px 0 0; padding:14px; margin:-14px -14px -14px; border-top:1px solid #2d3748;">
+        <div style="width:32px; height:3px; background:#4a5568; border-radius:2px; margin:0 auto 12px;"></div>
+        <div style="color:white; font-size:14px; font-weight:bold; text-align:right; margin-bottom:12px;">רישום תשלום — שרה כהן</div>
+        <div class="field-label">סכום (ברירת מחדל: ₪300)</div>
+        <input class="mock-input" value="300" style="margin-bottom:10px;" />
+        <div class="field-label">תאריך תשלום</div>
+        <input class="mock-input" value="06/05/2026" style="margin-bottom:12px;" />
+        <button class="mock-btn">אישור תשלום ✓</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Option B: Inline expand -->
+  <div class="option" onclick="toggleSelect(this)" data-choice="b">
+    <div class="option-label"><div class="letter">B</div> Inline expand — row expands in place</div>
+    <div class="phone-frame" style="border-radius:0; box-shadow:none; padding:14px; direction:rtl;">
+      <!-- other row -->
+      <div style="background:#0f3460; border-radius:8px; padding:10px 12px; margin-bottom:6px; display:flex; justify-content:space-between; align-items:center;">
+        <span style="background:#38a16922; color:#68d391; border:1px solid #38a16966; border-radius:5px; padding:3px 8px; font-size:12px; font-weight:bold;">₪250 ✓</span>
+        <div style="text-align:right;"><div style="color:white; font-size:13px;">דני לוי</div><div style="color:#a0aec0; font-size:11px;">11:00</div></div>
+      </div>
+      <!-- expanded row -->
+      <div style="background:#1a3a6e; border-radius:8px; padding:10px 12px; margin-bottom:6px; border:1px solid #3182ce;">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
+          <span style="background:#e53e3e22; color:#fc8181; border:1px solid #e53e3e66; border-radius:5px; padding:3px 8px; font-size:12px; font-weight:bold;">₪300</span>
+          <div style="text-align:right;"><div style="color:white; font-size:13px;">שרה כהן</div><div style="color:#a0aec0; font-size:11px;">10:00</div></div>
+        </div>
+        <div style="display:flex; gap:6px; margin-bottom:8px;">
+          <input class="mock-input" value="300" style="flex:1;" />
+          <input class="mock-input" value="06/05" style="flex:1;" />
+        </div>
+        <div style="display:flex; gap:6px;">
+          <button class="mock-btn ghost" style="flex:1; padding:7px;">ביטול</button>
+          <button class="mock-btn" style="flex:2; padding:7px;">אישור ✓</button>
+        </div>
+      </div>
+      <!-- other row -->
+      <div style="background:#0f3460; border-radius:8px; padding:10px 12px; display:flex; justify-content:space-between; align-items:center;">
+        <span style="background:#e53e3e22; color:#fc8181; border:1px solid #e53e3e66; border-radius:5px; padding:3px 8px; font-size:12px; font-weight:bold;">₪450</span>
+        <div style="text-align:right;"><div style="color:white; font-size:13px;">מיכל גל</div><div style="color:#a0aec0; font-size:11px;">14:00</div></div>
+      </div>
+    </div>
+  </div>
+
+</div>
