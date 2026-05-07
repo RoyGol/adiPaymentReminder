@@ -25,7 +25,17 @@ export async function middleware(request: NextRequest) {
     }
   )
 
-  const { data: { user } } = await supabase.auth.getUser()
+  // Session refresh is handled automatically: createServerClient's setAll callback
+  // writes updated tokens back to supabaseResponse cookies, propagating refreshed
+  // sessions to the browser without any manual intervention.
+  let user = null
+  try {
+    const { data } = await supabase.auth.getUser()
+    user = data.user
+  } catch {
+    // Supabase unreachable — treat as unauthenticated to avoid 500s
+  }
+
   const { pathname } = request.nextUrl
 
   const publicPaths = ['/login', '/auth']
