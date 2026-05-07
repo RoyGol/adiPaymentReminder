@@ -7,10 +7,15 @@ export default async function RootPage() {
 
   if (!user) redirect('/login')
 
-  const { count } = await supabase
-    .from('patients')
-    .select('*', { count: 'exact', head: true })
+  try {
+    const { count } = await supabase
+      .from('patients')
+      .select('*', { count: 'exact', head: true })
 
-  if (count === 0) redirect('/onboarding')
+    if (count === 0) redirect('/onboarding')
+  } catch {
+    // DB error — fall through to sessions
+  }
+
   redirect('/sessions')
 }

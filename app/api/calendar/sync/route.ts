@@ -52,7 +52,7 @@ export async function POST() {
     })
   }
 
-  await supabase.from('sync_log').insert({ events_fetched: events.length })
+  await supabase.from('sync_log').insert({ user_id: session.user.id, events_fetched: events.length })
 
   return NextResponse.json({ synced: matched.length, unknownNames })
 }
