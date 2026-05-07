@@ -33,20 +33,27 @@ export function StepLinkPatients({ unknownNames }: Props) {
 
   async function handleFinish() {
     setSaving(true)
-    await Promise.all(
-      entries.map((entry) =>
-        fetch('/api/patients', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            name: entry.name,
-            default_rate: entry.dismissed ? 0 : Number(entry.rate) || 0,
-            ignored: entry.dismissed,
-          }),
-        })
+    try {
+      await Promise.all(
+        entries.map((entry) =>
+          fetch('/api/patients', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              name: entry.name,
+              default_rate: entry.dismissed ? 0 : Number(entry.rate) || 0,
+              ignored: entry.dismissed,
+            }),
+          }).then((r) => {
+            if (!r.ok) throw new Error(`Failed to save ${entry.name}`)
+            return r.json()
+          })
+        )
       )
-    )
-    router.push('/sessions')
+      router.push('/sessions')
+    } catch {
+      setSaving(false)
+    }
   }
 
   if (unknownNames.length === 0) {
