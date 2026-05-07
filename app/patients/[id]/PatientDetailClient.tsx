@@ -40,7 +40,6 @@ export function PatientDetailClient({ patient, sessions }: Props) {
       <h1 className="text-white text-xl font-bold mb-3">{patient.name}</h1>
 
       <RateCard
-        patientId={patient.id}
         defaultRate={patient.default_rate}
         onUpdate={handleRateUpdate}
       />
