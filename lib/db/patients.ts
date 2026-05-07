@@ -14,11 +14,12 @@ export async function getPatients(supabase: SupabaseClient): Promise<Patient[]> 
 export async function createPatient(
   supabase: SupabaseClient,
   name: string,
-  defaultRate: number
+  defaultRate: number,
+  userId: string
 ): Promise<Patient> {
   const { data, error } = await supabase
     .from('patients')
-    .insert({ name, default_rate: defaultRate })
+    .insert({ name, default_rate: defaultRate, user_id: userId })
     .select()
     .single()
   if (error) throw error
@@ -42,11 +43,12 @@ export async function updatePatientRate(
 
 export async function ignorePatientName(
   supabase: SupabaseClient,
-  name: string
+  name: string,
+  userId: string
 ): Promise<void> {
   const { error } = await supabase
     .from('patients')
-    .upsert({ name, default_rate: 0, ignored: true }, { onConflict: 'user_id,name' })
+    .upsert({ name, default_rate: 0, ignored: true, user_id: userId }, { onConflict: 'user_id,name' })
   if (error) throw error
 }
 

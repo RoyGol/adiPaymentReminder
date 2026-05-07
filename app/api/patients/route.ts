@@ -23,10 +23,10 @@ export async function POST(request: Request) {
   }
 
   if (ignored) {
-    await ignorePatientName(supabase, name)
+    await ignorePatientName(supabase, name, user.id)
     return NextResponse.json({ ignored: true })
   }
 
-  const patient = await createPatient(supabase, name, default_rate ?? 0)
+  const patient = await createPatient(supabase, name, default_rate ?? 0, user.id)
   return NextResponse.json(patient)
 }
