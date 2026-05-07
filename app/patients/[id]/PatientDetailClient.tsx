@@ -1,6 +1,8 @@
 'use client'
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
+import { format } from 'date-fns'
+import { he } from 'date-fns/locale'
 import { RateCard } from '@/components/RateCard'
 import { PaymentSheet } from '@/components/PaymentSheet'
 import type { PatientWithStats, Session } from '@/lib/types'
@@ -75,7 +77,7 @@ export function PatientDetailClient({ patient, sessions }: Props) {
           </span>
           <div>
             <div className="text-white text-sm">
-              {s.start_time.slice(0, 10)}
+              {format(new Date(s.start_time), 'd בMMMM yyyy', { locale: he })}
             </div>
             <div className="text-gray-400 text-xs mt-0.5">
               {s.start_time.slice(11, 16)}
