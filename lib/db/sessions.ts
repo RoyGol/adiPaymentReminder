@@ -101,14 +101,16 @@ export async function getSessionStats(supabase: SupabaseClient): Promise<{
   if (unpaidRes.error) throw unpaidRes.error
   if (todayRes.error) throw todayRes.error
 
-  const totalDebt = unpaidRes.data.reduce(
+  const unpaidData = unpaidRes.data ?? []
+  const todayData = todayRes.data ?? []
+  const totalDebt = unpaidData.reduce(
     (sum: number, s: { amount: number }) => sum + s.amount,
     0
   )
 
   return {
     totalDebt,
-    unpaidCount: unpaidRes.data.length,
-    todayCount: todayRes.data.length,
+    unpaidCount: unpaidData.length,
+    todayCount: todayData.length,
   }
 }

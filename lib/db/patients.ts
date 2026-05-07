@@ -46,7 +46,7 @@ export async function ignorePatientName(
 ): Promise<void> {
   const { error } = await supabase
     .from('patients')
-    .insert({ name, default_rate: 0, ignored: true })
+    .upsert({ name, default_rate: 0, ignored: true }, { onConflict: 'user_id,name' })
   if (error) throw error
 }
 
@@ -79,7 +79,7 @@ export async function getPatientWithStats(
   if (patientRes.error) throw patientRes.error
   if (sessionsRes.error) throw sessionsRes.error
 
-  const sessions: { paid: boolean; amount: number }[] = sessionsRes.data
+  const sessions: { paid: boolean; amount: number }[] = sessionsRes.data ?? []
   const total_debt = sessions.filter((s) => !s.paid).reduce((sum, s) => sum + s.amount, 0)
   const total_paid = sessions.filter((s) => s.paid).reduce((sum, s) => sum + s.amount, 0)
 
