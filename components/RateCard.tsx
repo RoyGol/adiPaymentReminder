@@ -2,7 +2,6 @@
 import { useState } from 'react'
 
 interface Props {
-  patientId: string
   defaultRate: number
   onUpdate: (newRate: number) => Promise<void>
 }
