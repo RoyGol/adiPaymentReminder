@@ -1,5 +1,5 @@
 'use client'
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { format } from 'date-fns'
 import type { Session } from '@/lib/types'
 
@@ -10,16 +10,11 @@ interface Props {
 }
 
 export function PaymentSheet({ session, onClose, onConfirm }: Props) {
-  const [amount, setAmount] = useState(0)
-  const [date, setDate] = useState('')
+  const [amount, setAmount] = useState(() => session?.amount ?? 0)
+  const [date, setDate] = useState(() =>
+    session ? format(new Date(), 'yyyy-MM-dd') : ''
+  )
   const [loading, setLoading] = useState(false)
-
-  useEffect(() => {
-    if (session) {
-      setAmount(session.amount)
-      setDate(format(new Date(), 'yyyy-MM-dd'))
-    }
-  }, [session])
 
   if (!session) return null
 

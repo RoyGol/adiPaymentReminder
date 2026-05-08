@@ -1,5 +1,5 @@
 'use client'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 
 interface NameEntry {
@@ -19,6 +19,12 @@ export function StepLinkPatients({ unknownNames }: Props) {
   )
   const [saving, setSaving] = useState(false)
 
+  useEffect(() => {
+    if (unknownNames.length === 0) {
+      router.push('/sessions')
+    }
+  }, [unknownNames.length, router])
+
   function toggleDismiss(index: number) {
     setEntries((prev) =>
       prev.map((e, i) => (i === index ? { ...e, dismissed: !e.dismissed } : e))
@@ -34,7 +40,7 @@ export function StepLinkPatients({ unknownNames }: Props) {
   async function handleFinish() {
     setSaving(true)
     try {
-      await Promise.all(
+      const results = await Promise.allSettled(
         entries.map((entry) =>
           fetch('/api/patients', {
             method: 'POST',
@@ -50,16 +56,19 @@ export function StepLinkPatients({ unknownNames }: Props) {
           })
         )
       )
+      const failed = results.filter((r) => r.status === 'rejected')
+      if (failed.length > 0) {
+        alert(`שגיאה: ${failed.length} מטופלים לא נשמרו. נסי שוב.`)
+        setSaving(false)
+        return
+      }
       router.push('/sessions')
     } catch {
       setSaving(false)
     }
   }
 
-  if (unknownNames.length === 0) {
-    router.push('/sessions')
-    return null
-  }
+  if (unknownNames.length === 0) return null
 
   return (
     <div className="px-4 pt-8 pb-6 min-h-screen" dir="rtl">

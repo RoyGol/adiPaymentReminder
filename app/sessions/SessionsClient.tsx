@@ -29,12 +29,19 @@ export function SessionsClient({ todaySessions, unpaidSessions }: Props) {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ provider_token }),
       })
+      if (!res.ok) {
+        const err = await res.json().catch(() => ({}))
+        alert(err.error ?? 'שגיאה בסנכרון — נסי להתנתק ולהתחבר מחדש')
+        return
+      }
       const data = await res.json()
       if (data.unknownNames?.length > 0) {
         setUnknownNames(data.unknownNames)
       } else {
         router.refresh()
       }
+    } catch {
+      alert('שגיאה בסנכרון היומן')
     } finally {
       setSyncing(false)
     }

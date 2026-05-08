@@ -34,7 +34,7 @@ export function LinkPatientsSheet({ unknownNames, onClose, onDone }: Props) {
   async function handleSave() {
     setSaving(true)
     try {
-      await Promise.all(
+      const results = await Promise.allSettled(
         entries.map((entry) =>
           fetch('/api/patients', {
             method: 'POST',
@@ -50,6 +50,12 @@ export function LinkPatientsSheet({ unknownNames, onClose, onDone }: Props) {
           })
         )
       )
+      const failed = results.filter((r) => r.status === 'rejected')
+      if (failed.length > 0) {
+        alert(`שגיאה: ${failed.length} מטופלים לא נשמרו. נסי שוב.`)
+        setSaving(false)
+        return
+      }
       onDone()
     } catch {
       setSaving(false)
