@@ -46,10 +46,26 @@ export async function ignorePatientName(
   name: string,
   userId: string
 ): Promise<void> {
-  const { error } = await supabase
+  // Try to update existing patient to ignored=true first
+  const { data: existing } = await supabase
     .from('patients')
-    .upsert({ name, default_rate: 0, ignored: true, user_id: userId }, { onConflict: 'user_id,name' })
-  if (error) throw error
+    .select('id')
+    .eq('user_id', userId)
+    .eq('name', name)
+    .single()
+
+  if (existing) {
+    const { error } = await supabase
+      .from('patients')
+      .update({ ignored: true })
+      .eq('id', existing.id)
+    if (error) throw error
+  } else {
+    const { error } = await supabase
+      .from('patients')
+      .insert({ name, user_id: userId, default_rate: 0, ignored: true })
+    if (error) throw error
+  }
 }
 
 export async function getPatientNames(supabase: SupabaseClient): Promise<Set<string>> {
