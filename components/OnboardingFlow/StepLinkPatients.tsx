@@ -133,9 +133,16 @@ export function StepLinkPatients({ unknownNames }: Props) {
       <button
         onClick={handleFinish}
         disabled={saving}
-        className="w-full bg-blue-600 text-white rounded-xl py-4 font-medium mt-4 disabled:opacity-50"
+        className={`w-full bg-blue-600 text-white rounded-xl py-4 font-medium mt-4 disabled:opacity-70 ${saving ? 'btn-loading' : ''}`}
       >
-        {saving ? '...' : 'סיום וכניסה לאפליקציה ✓'}
+        {saving ? (
+          <span className="flex items-center justify-center gap-2">
+            <span className="spinner" />
+            שומר...
+          </span>
+        ) : (
+          'סיום וכניסה לאפליקציה ✓'
+        )}
       </button>
     </div>
   )

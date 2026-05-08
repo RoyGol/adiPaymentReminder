@@ -11,3 +11,90 @@ body {
   background-color: #1a1a2e;
   color: white;
 }
+
+/* ── Tap / Press feedback for interactive elements ── */
+button,
+[role="button"] {
+  transition: transform 0.1s ease, opacity 0.1s ease, box-shadow 0.15s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+
+button:active:not(:disabled),
+[role="button"]:active:not(:disabled) {
+  transform: scale(0.96);
+  opacity: 0.85;
+}
+
+/* ── Spinner animation ── */
+@keyframes spin-smooth {
+  to { transform: rotate(360deg); }
+}
+
+.spinner {
+  display: inline-block;
+  width: 18px;
+  height: 18px;
+  border: 2.5px solid rgba(255, 255, 255, 0.25);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: spin-smooth 0.6s linear infinite;
+  vertical-align: middle;
+}
+
+.spinner--sm {
+  width: 14px;
+  height: 14px;
+  border-width: 2px;
+}
+
+.spinner--blue {
+  border-color: rgba(96, 165, 250, 0.25);
+  border-top-color: #60a5fa;
+}
+
+/* ── Pulse shimmer for loading state buttons ── */
+@keyframes pulse-shimmer {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.6; }
+}
+
+.btn-loading {
+  animation: pulse-shimmer 1.2s ease-in-out infinite;
+  pointer-events: none;
+}
+
+/* ── Success flash ── */
+@keyframes success-flash {
+  0% { background-color: rgba(34, 197, 94, 0.3); }
+  100% { background-color: transparent; }
+}
+
+.success-flash {
+  animation: success-flash 0.8s ease-out;
+}
+
+/* ── Card / Row press feedback ── */
+.row-interactive {
+  transition: transform 0.1s ease, background-color 0.15s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.row-interactive:active {
+  transform: scale(0.98);
+  filter: brightness(1.15);
+}
+
+/* ── Skeleton shimmer for loading rows ── */
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.skeleton-row {
+  background: linear-gradient(90deg, #0f3460 25%, #16213e 50%, #0f3460 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s ease-in-out infinite;
+  border-radius: 8px;
+  height: 44px;
+  margin-bottom: 6px;
+}

@@ -32,7 +32,12 @@
       "Bash(vercel --yes --name adi-payment-reminder)",
       "Bash(vercel --prod)",
       "Bash(npm run *)",
-      "Bash(git stash *)"
+      "Bash(git stash *)",
+      "Bash(git -C \"G:\\\\AI\\\\adiPaymentReminder\" status)",
+      "Bash(git -C \"G:\\\\AI\\\\adiPaymentReminder\" diff)",
+      "Bash(git -C \"G:\\\\AI\\\\adiPaymentReminder\" add components/SessionList.tsx lib/db/sessions.ts app/api/sessions/range/route.ts)",
+      "Bash(git -C 'G:\\\\AI\\\\adiPaymentReminder' commit -m ' *)",
+      "Bash(git *)"
     ]
   }
 }

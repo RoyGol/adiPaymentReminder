@@ -56,7 +56,9 @@ export function StepSync({ onNext }: Props) {
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen px-6">
-      <div className="text-4xl mb-5">⏳</div>
+      <div className="mb-5" style={{ width: 48, height: 48 }}>
+        <span className="spinner spinner--blue" style={{ width: 48, height: 48, borderWidth: 4 }} />
+      </div>
       <h2 className="text-white text-lg font-bold mb-2">טוען פגישות...</h2>
       <p className="text-gray-400 text-sm mb-6">מושך פגישות מ־30 הימים האחרונים</p>
       {count !== null && (

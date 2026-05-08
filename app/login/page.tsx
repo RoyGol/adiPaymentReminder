@@ -1,8 +1,12 @@
 'use client'
+import { useState } from 'react'
 import { createClient } from '@/lib/supabase/client'
 
 export default function LoginPage() {
+  const [loading, setLoading] = useState(false)
+
   async function signIn() {
+    setLoading(true)
     const supabase = createClient()
     await supabase.auth.signInWithOAuth({
       provider: 'google',
@@ -22,9 +26,17 @@ export default function LoginPage() {
       </p>
       <button
         onClick={signIn}
-        className="w-full max-w-xs bg-blue-600 text-white rounded-xl py-4 text-base font-medium"
+        disabled={loading}
+        className={`w-full max-w-xs bg-blue-600 text-white rounded-xl py-4 text-base font-medium disabled:opacity-70 ${loading ? 'btn-loading' : ''}`}
       >
-        🔗 חיבור Google Calendar
+        {loading ? (
+          <span className="flex items-center justify-center gap-2">
+            <span className="spinner" />
+            מתחבר...
+          </span>
+        ) : (
+          '🔗 חיבור Google Calendar'
+        )}
       </button>
     </div>
   )

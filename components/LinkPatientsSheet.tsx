@@ -111,9 +111,16 @@ export function LinkPatientsSheet({ unknownNames, onClose, onDone }: Props) {
           <button
             onClick={handleSave}
             disabled={saving}
-            className="w-full bg-blue-600 text-white rounded-xl py-3.5 font-medium mt-2 disabled:opacity-50"
+            className={`w-full bg-blue-600 text-white rounded-xl py-3.5 font-medium mt-2 disabled:opacity-70 ${saving ? 'btn-loading' : ''}`}
           >
-            {saving ? '...' : 'שמירה ✓'}
+            {saving ? (
+              <span className="flex items-center justify-center gap-2">
+                <span className="spinner" />
+                שומר...
+              </span>
+            ) : (
+              'שמירה ✓'
+            )}
           </button>
         </div>
       </div>

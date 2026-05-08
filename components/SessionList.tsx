@@ -142,16 +142,27 @@ export function SessionList({ todaySessions, unpaidSessions, onSessionTap }: Pro
           />
           <button
             onClick={handleCustomSearch}
-            disabled={!customStart || !customEnd}
-            className="px-4 py-1.5 rounded-lg text-sm bg-blue-600 text-white disabled:opacity-50"
+            disabled={!customStart || !customEnd || loading}
+            className={`px-4 py-1.5 rounded-lg text-sm bg-blue-600 text-white disabled:opacity-50 ${loading ? 'btn-loading' : ''}`}
           >
-            חפש
+            {loading ? (
+              <span className="flex items-center gap-1.5">
+                <span className="spinner spinner--sm" />
+                מחפש...
+              </span>
+            ) : (
+              'חפש'
+            )}
           </button>
         </div>
       )}
 
       {loading ? (
-        <p className="text-gray-500 text-sm text-center py-8">טוען...</p>
+        <div className="py-2">
+          {[...Array(4)].map((_, i) => (
+            <div key={i} className="skeleton-row" />
+          ))}
+        </div>
       ) : sessions.length === 0 ? (
         <p className="text-gray-500 text-sm text-center py-8">אין פגישות להצגה</p>
       ) : (

@@ -1,15 +1,18 @@
 'use client'
 import Link from 'next/link'
 import { usePathname, useRouter } from 'next/navigation'
+import { useState } from 'react'
 import { createClient } from '@/lib/supabase/client'
 
 export function BottomNav() {
   const pathname = usePathname()
   const router = useRouter()
+  const [loggingOut, setLoggingOut] = useState(false)
 
   if (pathname === '/login' || pathname === '/onboarding') return null
 
   async function handleLogout() {
+    setLoggingOut(true)
     const supabase = createClient()
     await supabase.auth.signOut()
     router.push('/login')
@@ -37,10 +40,20 @@ export function BottomNav() {
       </Link>
       <button
         onClick={handleLogout}
-        className="flex flex-col items-center text-xs gap-0.5 text-gray-500"
+        disabled={loggingOut}
+        className="flex flex-col items-center text-xs gap-0.5 text-gray-500 disabled:opacity-50"
       >
-        <span>🚪</span>
-        <span>יציאה</span>
+        {loggingOut ? (
+          <>
+            <span className="spinner spinner--sm spinner--blue" />
+            <span>יוצא...</span>
+          </>
+        ) : (
+          <>
+            <span>🚪</span>
+            <span>יציאה</span>
+          </>
+        )}
       </button>
     </nav>
   )

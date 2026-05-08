@@ -14,6 +14,7 @@ interface Props {
 
 export function PatientDetailClient({ patient, sessions }: Props) {
   const [activeSession, setActiveSession] = useState<Session | null>(null)
+  const [loadingSessionId, setLoadingSessionId] = useState<string | null>(null)
   const router = useRouter()
 
   async function handleRateUpdate(newRate: number) {
@@ -35,12 +36,14 @@ export function PatientDetailClient({ patient, sessions }: Props) {
   }
 
   async function handleUnmarkPaid(sessionId: string) {
+    setLoadingSessionId(sessionId)
     await fetch(`/api/sessions/${sessionId}`, {
       method: 'PATCH',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ paid: false }),
     })
     router.refresh()
+    setLoadingSessionId(null)
   }
 
   return (
@@ -72,16 +75,21 @@ export function PatientDetailClient({ patient, sessions }: Props) {
       {sessions.map((s) => (
         <div
           key={s.id}
-          className="w-full bg-card rounded-lg px-3 py-2.5 mb-1.5 flex justify-between items-center text-right"
+          className="w-full bg-card rounded-lg px-3 py-2.5 mb-1.5 flex justify-between items-center text-right row-interactive"
         >
           <div className="flex items-center gap-2">
             {s.paid ? (
               <button
                 onClick={() => handleUnmarkPaid(s.id)}
-                className="text-gray-500 text-xs border border-gray-700 rounded px-2 py-0.5"
+                disabled={loadingSessionId === s.id}
+                className="text-gray-500 text-xs border border-gray-700 rounded px-2 py-0.5 disabled:opacity-50"
                 title="בטל תשלום"
               >
-                בטל
+                {loadingSessionId === s.id ? (
+                  <span className="spinner spinner--sm spinner--blue" />
+                ) : (
+                  'בטל'
+                )}
               </button>
             ) : (
               <button

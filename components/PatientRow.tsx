@@ -10,7 +10,7 @@ export function PatientRow({ patient, onClick }: Props) {
   return (
     <button
       onClick={() => onClick(patient.id)}
-      className="w-full bg-card rounded-lg px-3 py-2.5 mb-1.5 flex justify-between items-center text-right"
+      className="w-full bg-card rounded-lg px-3 py-2.5 mb-1.5 flex justify-between items-center text-right row-interactive"
     >
       <div className="text-left">
         {patient.total_debt > 0 ? (

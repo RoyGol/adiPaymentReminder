@@ -33,9 +33,16 @@ export function RateCard({ defaultRate, onUpdate }: Props) {
             <button
               onClick={handleSave}
               disabled={loading}
-              className="bg-blue-600 text-white rounded-lg px-4 py-1.5 text-xs disabled:opacity-50"
+              className={`bg-blue-600 text-white rounded-lg px-4 py-1.5 text-xs disabled:opacity-70 ${loading ? 'btn-loading' : ''}`}
             >
-              שמירה
+              {loading ? (
+                <span className="flex items-center gap-1.5">
+                  <span className="spinner spinner--sm" />
+                  שומר...
+                </span>
+              ) : (
+                'שמירה'
+              )}
             </button>
           </div>
           <input

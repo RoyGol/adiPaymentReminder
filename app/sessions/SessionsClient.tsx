@@ -64,8 +64,17 @@ export function SessionsClient({ todaySessions, unpaidSessions }: Props) {
           disabled={syncing}
           className="flex items-center gap-1.5 text-xs text-gray-400 border border-gray-700 rounded-lg px-3 py-1.5 disabled:opacity-50"
         >
-          <span className={syncing ? 'animate-spin' : ''}>🔄</span>
-          {syncing ? 'מסנכרן...' : 'סנכרן יומן'}
+          {syncing ? (
+            <>
+              <span className="spinner spinner--sm spinner--blue" />
+              מסנכרן...
+            </>
+          ) : (
+            <>
+              <span>🔄</span>
+              סנכרן יומן
+            </>
+          )}
         </button>
       </div>
       <SessionList

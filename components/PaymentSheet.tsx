@@ -50,9 +50,16 @@ export function PaymentSheet({ session, onClose, onConfirm }: Props) {
         <button
           onClick={handleConfirm}
           disabled={loading}
-          className="w-full bg-blue-600 text-white rounded-xl py-3.5 font-medium disabled:opacity-50"
+          className={`w-full bg-blue-600 text-white rounded-xl py-3.5 font-medium disabled:opacity-70 ${loading ? 'btn-loading' : ''}`}
         >
-          {loading ? '...' : 'אישור תשלום ✓'}
+          {loading ? (
+            <span className="flex items-center justify-center gap-2">
+              <span className="spinner" />
+              שומר...
+            </span>
+          ) : (
+            'אישור תשלום ✓'
+          )}
         </button>
       </div>
     </div>

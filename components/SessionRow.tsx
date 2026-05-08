@@ -13,7 +13,7 @@ export function SessionRow({ session, onTap }: Props) {
   return (
     <button
       onClick={() => onTap(session)}
-      className="w-full bg-card rounded-lg px-3 py-2.5 mb-1.5 flex justify-between items-center text-right"
+      className="w-full bg-card rounded-lg px-3 py-2.5 mb-1.5 flex justify-between items-center text-right row-interactive"
     >
       <span
         className={`rounded-md px-2 py-1 text-xs font-bold ${
