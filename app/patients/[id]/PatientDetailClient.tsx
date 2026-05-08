@@ -34,6 +34,15 @@ export function PatientDetailClient({ patient, sessions }: Props) {
     router.refresh()
   }
 
+  async function handleUnmarkPaid(sessionId: string) {
+    await fetch(`/api/sessions/${sessionId}`, {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ paid: false }),
+    })
+    router.refresh()
+  }
+
   return (
     <>
       <button onClick={() => router.back()} className="text-blue-400 text-sm mb-3 block">
@@ -61,20 +70,33 @@ export function PatientDetailClient({ patient, sessions }: Props) {
 
       <p className="text-gray-500 text-xs mb-2">היסטוריית פגישות</p>
       {sessions.map((s) => (
-        <button
+        <div
           key={s.id}
-          onClick={() => !s.paid && setActiveSession({ ...s, patient })}
           className="w-full bg-card rounded-lg px-3 py-2.5 mb-1.5 flex justify-between items-center text-right"
         >
-          <span
-            className={`rounded-md px-2 py-1 text-xs font-bold ${
-              s.paid
-                ? 'bg-green-900/40 text-green-400 border border-green-700/50'
-                : 'bg-red-900/40 text-red-400 border border-red-700/50'
-            }`}
-          >
-            {s.paid ? `₪${s.amount} ✓` : `₪${s.amount}`}
-          </span>
+          <div className="flex items-center gap-2">
+            {s.paid ? (
+              <button
+                onClick={() => handleUnmarkPaid(s.id)}
+                className="text-gray-500 text-xs border border-gray-700 rounded px-2 py-0.5"
+                title="בטל תשלום"
+              >
+                בטל
+              </button>
+            ) : (
+              <button
+                onClick={() => setActiveSession({ ...s, patient })}
+                className="bg-red-900/40 text-red-400 border border-red-700/50 rounded-md px-2 py-1 text-xs font-bold"
+              >
+                ₪{s.amount}
+              </button>
+            )}
+            {s.paid && (
+              <span className="bg-green-900/40 text-green-400 border border-green-700/50 rounded-md px-2 py-1 text-xs font-bold">
+                ₪{s.amount} ✓
+              </span>
+            )}
+          </div>
           <div>
             <div className="text-white text-sm">
               {format(new Date(s.start_time), 'd בMMMM yyyy', { locale: he })}
@@ -83,7 +105,7 @@ export function PatientDetailClient({ patient, sessions }: Props) {
               {s.start_time.slice(11, 16)}
             </div>
           </div>
-        </button>
+        </div>
       ))}
 
       <PaymentSheet

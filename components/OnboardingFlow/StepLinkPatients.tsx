@@ -37,6 +37,12 @@ export function StepLinkPatients({ unknownNames }: Props) {
     )
   }
 
+  useEffect(() => {
+    if (unknownNames.length === 0) {
+      router.push('/sessions')
+    }
+  }, [unknownNames.length, router])
+
   async function handleFinish() {
     setSaving(true)
     try {
