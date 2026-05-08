@@ -93,6 +93,22 @@ export async function unmarkSessionPaid(
   return data
 }
 
+export async function getSessionsByDateRange(
+  supabase: SupabaseClient,
+  start: string,
+  end: string
+): Promise<Session[]> {
+  const { data, error } = await supabase
+    .from('sessions')
+    .select('*, patient:patients(*)')
+    .gte('start_time', start)
+    .lt('start_time', end)
+    .not('patient_id', 'is', null)
+    .order('start_time')
+  if (error) throw error
+  return data
+}
+
 export async function upsertSession(
   supabase: SupabaseClient,
   session: {
