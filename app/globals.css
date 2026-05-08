@@ -98,3 +98,58 @@ button:active:not(:disabled),
   height: 44px;
   margin-bottom: 6px;
 }
+
+/* ── Skeleton text blocks ── */
+.skeleton-text {
+  background: linear-gradient(90deg, #0f3460 25%, #16213e 50%, #0f3460 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s ease-in-out infinite;
+  border-radius: 4px;
+  height: 14px;
+  width: 60%;
+}
+
+.skeleton-text--lg {
+  height: 20px;
+  width: 40%;
+}
+
+.skeleton-text--sm {
+  height: 10px;
+  width: 50%;
+}
+
+/* ── Skeleton pill (tab/filter) ── */
+.skeleton-pill {
+  background: linear-gradient(90deg, #0f3460 25%, #16213e 50%, #0f3460 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s ease-in-out infinite;
+  border-radius: 9999px;
+  height: 30px;
+  width: 56px;
+}
+
+/* ── Top navigation loading bar ── */
+.nav-loader-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  z-index: 9999;
+  background: transparent;
+}
+
+.nav-loader-bar {
+  height: 100%;
+  background: linear-gradient(90deg, #3b82f6, #60a5fa, #93c5fd);
+  border-radius: 0 2px 2px 0;
+  transition: width 0.2s ease;
+  box-shadow: 0 0 8px rgba(59, 130, 246, 0.5), 0 0 4px rgba(59, 130, 246, 0.3);
+}
+
+/* ── Nav item loading pulse ── */
+.nav-item-loading {
+  animation: pulse-shimmer 1s ease-in-out infinite;
+}
+

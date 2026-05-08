@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import './globals.css'
 import { BottomNav } from '@/components/BottomNav'
+import { NavigationLoader } from '@/components/NavigationLoader'
 
 export const metadata: Metadata = { title: 'ניהול תשלומים' }
 
@@ -15,6 +16,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         />
       </head>
       <body className="bg-surface text-white font-sans min-h-screen pb-16">
+        <NavigationLoader />
         {children}
         <BottomNav />
       </body>
