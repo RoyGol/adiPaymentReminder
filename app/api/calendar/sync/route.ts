@@ -13,9 +13,14 @@ export async function POST(request: Request) {
   }
 
   const body = await request.json().catch(() => ({}))
-  const accessToken = body.provider_token ?? session.provider_token
+  const { data: { user } } = await supabase.auth.getUser()
+  const accessToken =
+    body.provider_token ??
+    session.provider_token ??
+    user?.user_metadata?.google_access_token ??
+    null
   if (!accessToken) {
-    return NextResponse.json({ error: 'No Google access token' }, { status: 400 })
+    return NextResponse.json({ error: 'No Google access token — please log out and log in again' }, { status: 400 })
   }
 
   const [knownNames, ignoredNames] = await Promise.all([

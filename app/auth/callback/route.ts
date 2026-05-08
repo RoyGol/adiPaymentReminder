@@ -11,6 +11,17 @@ export async function GET(request: Request) {
     if (!error) {
       const { data: { user } } = await supabase.auth.getUser()
       if (user) {
+        // Store Google token in user metadata while it's available
+        const { data: { session } } = await supabase.auth.getSession()
+        if (session?.provider_token) {
+          await supabase.auth.updateUser({
+            data: {
+              google_access_token: session.provider_token,
+              google_token_saved_at: Date.now(),
+            },
+          })
+        }
+
         const { count } = await supabase
           .from('patients')
           .select('*', { count: 'exact', head: true })
