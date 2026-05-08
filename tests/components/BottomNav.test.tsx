@@ -5,6 +5,7 @@ import { BottomNav } from '@/components/BottomNav'
 
 vi.mock('next/navigation', () => ({
   usePathname: vi.fn().mockReturnValue('/sessions'),
+  useRouter: vi.fn().mockReturnValue({ push: vi.fn(), replace: vi.fn(), back: vi.fn() }),
 }))
 
 describe('BottomNav', () => {

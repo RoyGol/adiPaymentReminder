@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server'
 import { createClient } from '@/lib/supabase/server'
-import { markSessionPaid } from '@/lib/db/sessions'
+import { markSessionPaid, unmarkSessionPaid } from '@/lib/db/sessions'
 
 export async function PATCH(
   request: Request,
@@ -11,8 +11,14 @@ export async function PATCH(
   if (!user) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
 
   const { id } = await params
-  const { amount, paid_date } = await request.json()
+  const body = await request.json()
 
+  if (body.paid === false) {
+    const session = await unmarkSessionPaid(supabase, id)
+    return NextResponse.json(session)
+  }
+
+  const { amount, paid_date } = body
   if (typeof amount !== 'number' || !paid_date) {
     return NextResponse.json({ error: 'amount and paid_date required' }, { status: 400 })
   }

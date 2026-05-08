@@ -1,10 +1,32 @@
 import type { SupabaseClient } from '@supabase/supabase-js'
 import type { Session } from '../types'
 
+function getIsraelDayBoundaries(): { start: string; end: string } {
+  const TZ = 'Asia/Jerusalem'
+  const now = new Date()
+
+  // Today's date string in Israel timezone (sv locale = YYYY-MM-DD)
+  const todayIsrael = new Intl.DateTimeFormat('sv', { timeZone: TZ }).format(now)
+
+  // Israel's current UTC offset (handles DST: +2 winter, +3 summer)
+  const noonUTC = new Date()
+  noonUTC.setUTCHours(12, 0, 0, 0)
+  const israelHourAtNoon = parseInt(
+    new Intl.DateTimeFormat('en', { timeZone: TZ, hour: 'numeric', hour12: false }).format(noonUTC),
+    10
+  )
+  const offsetHours = israelHourAtNoon - 12
+
+  // Midnight Israel in UTC
+  const start = new Date(`${todayIsrael}T00:00:00.000Z`)
+  start.setUTCHours(start.getUTCHours() - offsetHours)
+  const end = new Date(start.getTime() + 24 * 60 * 60 * 1000)
+
+  return { start: start.toISOString(), end: end.toISOString() }
+}
+
 export async function getTodaySessions(supabase: SupabaseClient): Promise<Session[]> {
-  const today = new Date()
-  const start = new Date(today.getFullYear(), today.getMonth(), today.getDate()).toISOString()
-  const end = new Date(today.getFullYear(), today.getMonth(), today.getDate() + 1).toISOString()
+  const { start, end } = getIsraelDayBoundaries()
 
   const { data, error } = await supabase
     .from('sessions')
@@ -57,6 +79,20 @@ export async function markSessionPaid(
   return data
 }
 
+export async function unmarkSessionPaid(
+  supabase: SupabaseClient,
+  id: string
+): Promise<Session> {
+  const { data, error } = await supabase
+    .from('sessions')
+    .update({ paid: false, amount: 0, paid_date: null })
+    .eq('id', id)
+    .select()
+    .single()
+  if (error) throw error
+  return data
+}
+
 export async function upsertSession(
   supabase: SupabaseClient,
   session: {
@@ -78,9 +114,7 @@ export async function getSessionStats(supabase: SupabaseClient): Promise<{
   todayCount: number
   unpaidCount: number
 }> {
-  const today = new Date()
-  const start = new Date(today.getFullYear(), today.getMonth(), today.getDate()).toISOString()
-  const end = new Date(today.getFullYear(), today.getMonth(), today.getDate() + 1).toISOString()
+  const { start, end } = getIsraelDayBoundaries()
 
   const [unpaidRes, todayRes] = await Promise.all([
     supabase
