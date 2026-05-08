@@ -1,5 +1,6 @@
 'use client'
 import { useEffect, useState, useCallback } from 'react'
+import { createClient } from '@/lib/supabase/client'
 
 interface Props {
   onNext: (unknownNames: string[]) => void
@@ -9,10 +10,17 @@ export function StepSync({ onNext }: Props) {
   const [count, setCount] = useState<number | null>(null)
   const [error, setError] = useState<string | null>(null)
 
-  const runSync = useCallback(() => {
+  const runSync = useCallback(async () => {
     setError(null)
     setCount(null)
-    fetch('/api/calendar/sync', { method: 'POST' })
+    const supabase = createClient()
+    const { data: { session } } = await supabase.auth.getSession()
+    const provider_token = session?.provider_token ?? null
+    fetch('/api/calendar/sync', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ provider_token }),
+    })
       .then((r) => {
         if (!r.ok) throw new Error(`Sync failed: ${r.status}`)
         return r.json()

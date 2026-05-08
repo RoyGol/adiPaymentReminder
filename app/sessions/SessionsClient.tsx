@@ -5,6 +5,7 @@ import { PaymentSheet } from '@/components/PaymentSheet'
 import { LinkPatientsSheet } from '@/components/LinkPatientsSheet'
 import type { Session } from '@/lib/types'
 import { useRouter } from 'next/navigation'
+import { createClient } from '@/lib/supabase/client'
 
 interface Props {
   todaySessions: Session[]
@@ -20,7 +21,14 @@ export function SessionsClient({ todaySessions, unpaidSessions }: Props) {
   async function handleSync() {
     setSyncing(true)
     try {
-      const res = await fetch('/api/calendar/sync', { method: 'POST' })
+      const supabase = createClient()
+      const { data: { session } } = await supabase.auth.getSession()
+      const provider_token = session?.provider_token ?? null
+      const res = await fetch('/api/calendar/sync', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ provider_token }),
+      })
       const data = await res.json()
       if (data.unknownNames?.length > 0) {
         setUnknownNames(data.unknownNames)

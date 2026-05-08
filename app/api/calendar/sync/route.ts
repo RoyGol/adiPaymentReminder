@@ -4,7 +4,7 @@ import { fetchRecentEvents, matchEventsToPatients, extractUnknownNames } from '@
 import { getPatientNames, getIgnoredNames } from '@/lib/db/patients'
 import { upsertSession } from '@/lib/db/sessions'
 
-export async function POST() {
+export async function POST(request: Request) {
   const supabase = await createClient()
   const { data: { session } } = await supabase.auth.getSession()
 
@@ -12,7 +12,8 @@ export async function POST() {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
   }
 
-  const accessToken = session.provider_token
+  const body = await request.json().catch(() => ({}))
+  const accessToken = body.provider_token ?? session.provider_token
   if (!accessToken) {
     return NextResponse.json({ error: 'No Google access token' }, { status: 400 })
   }
